@@ -13,15 +13,12 @@ class GamesController < ApplicationController
   elsif included?(@word) == true && english?(@word) == true
    @answer = "Congratulations you earn #{@word.length*10} points, #{@word.upcase} is a valid english word"
   end
+
  end
 
  def included?(guess)
   guess.chars.all? { |letter| guess.count(letter) <= @grid.downcase.count(letter) }  
  end
-
- # def score(guess)
- #  return "#{guess.length*10}"
- # end
 
  def english?(word)
   response = open("https://wagon-dictionary.herokuapp.com/#{@word}")
